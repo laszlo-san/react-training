@@ -17,7 +17,7 @@ class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </Aux>
+        </Aux>
     );
   }
 }
