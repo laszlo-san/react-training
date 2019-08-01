@@ -14,6 +14,10 @@ const INGREDIENT_PRICES = {
 };
 
 class BurgerBuilder extends Component {
+  // constructor(props) {
+  //     super(props);
+  //     this.state = {...}
+  // }
   state = {
     ingredients: {
       salad: 0,
@@ -26,7 +30,7 @@ class BurgerBuilder extends Component {
     purchasing: false
   };
 
-  updatePurchaseState = ingredients => {
+  updatePurchaseState(ingredients) {
     const sum = Object.keys(ingredients)
       .map(igKey => {
         return ingredients[igKey];
@@ -35,7 +39,7 @@ class BurgerBuilder extends Component {
         return sum + el;
       }, 0);
     this.setState({ purchasable: sum > 0 });
-  };
+  }
 
   addIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
@@ -77,7 +81,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    alert("Yout continue!");
+    alert("You continue!");
   };
 
   render() {
@@ -87,7 +91,7 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
-
+    // {salad: true, meat: false, ...}
     return (
       <Aux>
         <Modal
@@ -96,9 +100,9 @@ class BurgerBuilder extends Component {
         >
           <OrderSummary
             ingredients={this.state.ingredients}
+            price={this.state.totalPrice}
             purchaseCancelled={this.purchaseCancelHandler}
             purchaseContinued={this.purchaseContinueHandler}
-            price={this.state.totalPrice}
           />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
